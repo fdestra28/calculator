@@ -16,6 +16,8 @@ buttons.forEach(button => {
       appendOperator(value);
     } else if (value === '()') {
       appendParenthesis();
+    } else if (value === '←') {
+      deleteLastCharacter();
     } else {
       appendNumber(value);
     }
@@ -68,6 +70,11 @@ function appendParenthesis() {
   }
   expression += isOpenParenthesisNext ? '(' : ')';
   isOpenParenthesisNext = !isOpenParenthesisNext;
+  updateDisplay(expression);
+}
+
+function deleteLastCharacter() {
+  expression = expression.slice(0, -1);
   updateDisplay(expression);
 }
 
