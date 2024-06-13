@@ -3,231 +3,231 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #E9ECEE;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
+    font-family: Arial, sans-serif; /* Set the default font family for the body */
+    background-color: #E9ECEE; /* Set the background color for the body */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    height: 100vh; /* Full viewport height */
+    text-align: center; /* Center text horizontally */
 }
 
 body.dark-mode {
-  background-color: #333;
-  color: #f0f0f0;
+    background-color: #333; /* Dark mode background color */
+    color: #f0f0f0; /* Dark mode text color */
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center items horizontally */
 }
 
 h1 {
-  margin-bottom: 10px;
-  font-size: 2rem;
-  color: #333;
+    margin-bottom: 10px; /* Bottom margin for the heading */
+    font-size: 2rem; /* Font size for the heading */
+    color: #333; /* Heading color */
 }
 
 body.dark-mode h1 {
-  color: #f0f0f0;
+    color: #f0f0f0; /* Dark mode heading color */
 }
 
 .typing {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  color: #666;
-  overflow: hidden; 
-  border-right: .15em solid orange; 
-  white-space: nowrap; 
-  margin: 0 auto; 
-  letter-spacing: .15em; 
-  animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+    margin-bottom: 20px; /* Bottom margin for the typing animation */
+    font-size: 1.2rem; /* Font size for the typing animation */
+    color: #666; /* Color of the typing animation text */
+    overflow: hidden; /* Hide overflow content */
+    border-right: .15em solid orange; /* Typing animation cursor */
+    white-space: nowrap; /* Prevent text wrapping */
+    margin: 0 auto; /* Center horizontally */
+    letter-spacing: .15em; /* Spacing between letters */
+    animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite; /* Typing animation and cursor blinking */
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+    from { width: 0 } /* Typing animation start */
+    to { width: 100% } /* Typing animation end */
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
+    from, to { border-color: transparent } /* Cursor blinking animation */
+    50% { border-color: orange; } /* Cursor color change */
 }
 
 .calculator {
-  background-color: rgba(214, 222, 229);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  width: 300px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  margin-top: 20px;
-  z-index: 999;
+    background-color: rgba(214, 222, 229); /* Calculator background color */
+    border-radius: 20px; /* Rounded corners for calculator */
+    backdrop-filter: blur(10px); /* Background blur effect */
+    padding: 20px; /* Padding inside the calculator */
+    width: 300px; /* Width of the calculator */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Box shadow for calculator */
+    margin-bottom: 20px; /* Bottom margin for the calculator */
+    margin-top: 20px; /* Top margin for the calculator */
+    z-index: 999; /* Stack order for overlapping elements */
 }
 
 body.dark-mode .calculator {
-  background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7); /* Dark mode calculator background color */
 }
 
 .display {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  color: #000;
-  font-size: 2rem;
-  padding: 10px;
-  text-align: right;
-  margin-bottom: 10px;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.5); /* Display background color */
+    border-radius: 10px; /* Rounded corners for display */
+    backdrop-filter: blur(5px); /* Background blur effect */
+    color: #000; /* Text color for display */
+    font-size: 2rem; /* Font size for display */
+    padding: 10px; /* Padding inside display */
+    text-align: right; /* Right-aligned text */
+    margin-bottom: 10px; /* Bottom margin for display */
+    min-height: 50px; /* Minimum height of the display */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: flex-end; /* Align content to the end */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Inset shadow for display */
 }
 
 body.dark-mode .display {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.15); /* Dark mode display background color */
+    color: #f0f0f0; /* Dark mode text color for display */
 }
 
 .buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+    display: grid; /* Use CSS grid for button layout */
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: 10px; /* Gap between grid items */
 }
 
 .btn {
-  background-color: rgba(255, 255, 255, 0.25);
-  border: none;
-  border-radius: 10px;
-  color: #000;
-  font-size: 1.5rem;
-  padding: 15px 0;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.25); /* Button background color */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners for buttons */
+    color: #000; /* Button text color */
+    font-size: 1.5rem; /* Font size for buttons */
+    padding: 15px 0; /* Vertical padding for buttons */
+    text-align: center; /* Center text horizontally */
+    cursor: pointer; /* Cursor style */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for buttons */
 }
 
 body.dark-mode .btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.1); /* Dark mode button background color */
+    color: #f0f0f0; /* Dark mode text color for buttons */
 }
 
 .btn:hover {
-  background-color: rgba(168, 168, 185, 0.3);
+    background-color: rgba(168, 168, 185, 0.3); /* Button hover background color */
 }
 
 .btn:active {
-  transform: scale(1.1);
+    transform: scale(1.1); /* Button scale on active state */
 }
 
 .btn#clear {
-  background-color: #ff6347;
+    background-color: #ff6347; /* Background color for clear button */
 }
 
 body.dark-mode .btn#clear {
-  background-color: #ff4500;
+    background-color: #ff4500; /* Dark mode background color for clear button */
 }
 
 .btn#equals {
-  background-color: #3cb371;
+    background-color: #3cb371; /* Background color for equals button */
 }
 
 body.dark-mode .btn#equals {
-  background-color: #2e8b57;
+    background-color: #2e8b57; /* Dark mode background color for equals button */
 }
 
 .btn#toggle-sign {
-  background-color: #4682b4;
+    background-color: #4682b4; /* Background color for toggle sign button */
 }
 
 body.dark-mode .btn#toggle-sign {
-  background-color: #4169e1;
+    background-color: #4169e1; /* Dark mode background color for toggle sign button */
 }
 
 .btn {
-  position: relative;
-  overflow: hidden;
+    position: relative; /* Position relative for button */
+    overflow: hidden; /* Hide overflow content */
 }
 
 .btn:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300%;
-  height: 300%;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
-  border-radius: 50%;
-  z-index: 0;
-  transform: translate(-50%, -50%);
+    content: ''; /* Empty content before button */
+    position: absolute; /* Position absolute */
+    top: 50%; /* Align to center vertically */
+    left: 50%; /* Align to center horizontally */
+    width: 300%; /* Width of the pseudo-element */
+    height: 300%; /* Height of the pseudo-element */
+    background-color: rgba(255, 255, 255, 0.1); /* Background color of pseudo-element */
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease; /* Transition effects */
+    border-radius: 50%; /* Rounded corners for pseudo-element */
+    z-index: 0; /* Stack order */
+    transform: translate(-50%, -50%); /* Center pseudo-element */
 }
 
 .btn:hover:before {
-  width: 0;
-  height: 0;
-  top: 50%;
-  left: 50%;
+    width: 0; /* Shrink width on hover */
+    height: 0; /* Shrink height on hover */
+    top: 50%; /* Center vertically on hover */
+    left: 50%; /* Center horizontally on hover */
 }
 
 .btn:active:before {
-  width: 300%;
-  height: 300%;
-  top: 0;
-  left: 0;
+    width: 300%; /* Expand width on active state */
+    height: 300%; /* Expand height on active state */
+    top: 0; /* Align to top on active state */
+    left: 0; /* Align to left on active state */
 }
 
 .btn:active {
-  box-shadow: none;
+    box-shadow: none; /* Remove box shadow on active state */
 }
 
 #explanation {
-    font-size: 12px;
+    font-size: 12px; /* Font size for explanation paragraph */
 }
 
 /* Responsive design */
 @media (max-width: 600px) {
-  .calculator {
-    width: 95%;
-  }
+    .calculator {
+        width: 95%; /* Adjust calculator width for smaller screens */
+    }
 
-  .display {
-    font-size: 1.5rem;
-  }
+    .display {
+        font-size: 1.5rem; /* Adjust display font size for smaller screens */
+    }
 
-  .btn {
-    font-size: 1.2rem;
-    padding: 10px 0;
-  }
+    .btn {
+        font-size: 1.2rem; /* Adjust button font size for smaller screens */
+        padding: 10px 0; /* Adjust button padding for smaller screens */
+    }
 }
 
 /* Floating dark mode toggle button */
 .dark-mode-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dark-mode-toggle:hover {
-    background-color: #444;
-  }
+    position: fixed; /* Fixed position for toggle button */
+    bottom: 20px; /* Distance from bottom edge */
+    right: 20px; /* Distance from right edge */
+    background-color: #333; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* No border */
+    border-radius: 50%; /* Rounded corners for button */
+    width: 50px; /* Width of the button */
+    height: 50px; /* Height of the button */
+    font-size: 1.5rem; /* Font size for button text */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    cursor: pointer; /* Cursor style */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for button */
+}
+
+.dark-mode-toggle:hover {
+    background-color: #444; /* Darken background on hover */
+}
