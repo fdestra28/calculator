@@ -1,103 +1,75 @@
+// Select elements
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn');
-let expression = '';
-let isOpenParenthesisNext = true;
-let resultDisplayed = false;
+const clearButton = document.getElementById('clear');
+const equalsButton = document.getElementById('equals');
+const toggleSignButton = document.getElementById('toggle-sign');
+const backspaceButton = document.getElementById('backspace');
 
+// Event listeners for button clicks
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.textContent;
 
-    if (value === 'C') {
-      clearDisplay();
-    } else if (value === '=') {
+    if (value === '=') {
       calculate();
-    } else if (['+', '-', '*', '/'].includes(value)) {
-      appendOperator(value);
-    } else if (value === '()') {
-      appendParenthesis();
-    } else if (value === '←') {
-      deleteLastCharacter();
+    } else if (value === 'C') {
+      clearDisplay();
     } else if (value === '±') {
       toggleSign();
+    } else if (value === '←') {
+      backspace();
     } else {
-      appendNumber(value);
+      addToDisplay(value);
     }
   });
 });
 
-function clearDisplay() {
-  expression = '';
-  isOpenParenthesisNext = true;
-  resultDisplayed = false;
-  updateDisplay('');
+// Event listener for keyboard input
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+
+  // Handle numeric and operator keys
+  if (!isNaN(key) || '+-*/.'.includes(key)) {
+    addToDisplay(key);
+  } else if (key === 'Enter') {
+    calculate();
+  } else if (key === 'Backspace') {
+    backspace();
+  } else if (key === 'Escape') {
+    clearDisplay();
+  }
+});
+
+// Function to add content to display
+function addToDisplay(value) {
+  display.textContent += value;
 }
 
+// Function to clear the display
+function clearDisplay() {
+  display.textContent = '';
+}
+
+// Function to toggle sign of displayed number
+function toggleSign() {
+  const currentValue = parseFloat(display.textContent);
+  if (!isNaN(currentValue)) {
+    display.textContent = currentValue * -1;
+  }
+}
+
+// Function to perform backspace
+function backspace() {
+  display.textContent = display.textContent.slice(0, -1);
+}
+
+// Function to perform calculation
 function calculate() {
   try {
-    // Evaluate the expression and format the result
-    const result = eval(expression.replace(/,/g, '')).toLocaleString();
-    updateDisplay(`${expression} = ${result}`);
-    expression = result;  // Set result as new expression for further calculations
-    resultDisplayed = true;
+    const result = eval(display.textContent);
+    display.textContent = result;
   } catch (error) {
-    updateDisplay('Error');
-    expression = '';
+    display.textContent = 'Error';
   }
-}
-
-function appendOperator(op) {
-  if (resultDisplayed) {
-    expression = '';  // Reset expression if a new calculation starts after result is displayed
-    resultDisplayed = false;
-  }
-  expression += ` ${op} `;
-  updateDisplay(expression);
-}
-
-function appendNumber(num) {
-  if (resultDisplayed) {
-    expression = '';  // Reset expression if a new calculation starts after result is displayed
-    resultDisplayed = false;
-  }
-  if (num === '.' && expression.slice(-1) === '.') return;  // Prevent multiple decimals in a row
-  expression += num;
-  updateDisplay(formatExpression(expression));
-}
-
-function appendParenthesis() {
-  if (resultDisplayed) {
-    expression = '';  // Reset expression if a new calculation starts after result is displayed
-    resultDisplayed = false;
-  }
-  expression += isOpenParenthesisNext ? '(' : ')';
-  isOpenParenthesisNext = !isOpenParenthesisNext;
-  updateDisplay(expression);
-}
-
-function deleteLastCharacter() {
-  expression = expression.slice(0, -1);
-  updateDisplay(expression);
-}
-
-function toggleSign() {
-  const parts = expression.split(' ');
-  const lastPart = parts.pop();
-  if (lastPart) {
-    if (lastPart.startsWith('-')) {
-      parts.push(lastPart.slice(1));
-    } else {
-      parts.push('-' + lastPart);
-    }
-    expression = parts.join(' ');
-    updateDisplay(expression);
-  }
-}
-
-function formatExpression(exp) {
-  return exp.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-function updateDisplay(value) {
-  display.textContent = value;
 }
