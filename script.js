@@ -1,5 +1,6 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn');
+const darkModeToggle = document.getElementById('dark-mode-toggle');
 let expression = '';
 let isOpenParenthesisNext = true;  // Track if the next parenthesis should be open
 let resultDisplayed = false;
@@ -44,6 +45,8 @@ document.addEventListener('keydown', (event) => {
   } else if (key === '(') {
     appendParenthesis('(');
   } else if (key === ')') {
+    appendParenthesis(')');
+} else if (key === ')') {
     appendParenthesis(')');
   }
 });
@@ -131,3 +134,8 @@ function formatExpression(exp) {
 function updateDisplay(value) {
   display.textContent = value;
 }
+
+// Event listener for dark mode toggle
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});
