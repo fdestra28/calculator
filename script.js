@@ -32,13 +32,19 @@ document.addEventListener('keydown', (event) => {
   const key = event.key;
 
   if (!isNaN(key) || '+-*/.'.includes(key)) {
-    addToDisplay(key);
+    appendNumber(key);
   } else if (key === 'Enter') {
+    event.preventDefault();
     calculate();
   } else if (key === 'Backspace') {
-    backspace();
+    event.preventDefault();
+    deleteLastCharacter();
   } else if (key === 'Escape') {
     clearDisplay();
+  } else if (key === '(') {
+    appendParenthesis('(');
+  } else if (key === ')') {
+    appendParenthesis(')');
   }
 });
 
