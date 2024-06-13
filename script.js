@@ -1,7 +1,8 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn');
-let currentInput = '';
 let expression = '';
+let isOpenParenthesisNext = true;
+let resultDisplayed = false;
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
@@ -13,6 +14,8 @@ buttons.forEach(button => {
       calculate();
     } else if (['+', '-', '*', '/'].includes(value)) {
       appendOperator(value);
+    } else if (value === '()') {
+      appendParenthesis();
     } else {
       appendNumber(value);
     }
@@ -20,51 +23,56 @@ buttons.forEach(button => {
 });
 
 function clearDisplay() {
-  currentInput = '';
   expression = '';
+  isOpenParenthesisNext = true;
+  resultDisplayed = false;
   updateDisplay('');
 }
 
 function calculate() {
-  if (expression !== '' && currentInput !== '') {
-    expression += currentInput;
-    try {
-      const result = eval(expression).toLocaleString();
-      updateDisplay(`${expression} = ${result}`);
-      currentInput = '';
-      expression = '';
-    } catch (error) {
-      updateDisplay('Error');
-      currentInput = '';
-      expression = '';
-    }
+  try {
+    // Evaluate the expression and format the result
+    const result = eval(expression.replace(/,/g, '')).toLocaleString();
+    updateDisplay(`${expression} = ${result}`);
+    expression = result;  // Set result as new expression for further calculations
+    resultDisplayed = true;
+  } catch (error) {
+    updateDisplay('Error');
+    expression = '';
   }
 }
 
 function appendOperator(op) {
-  if (currentInput !== '') {
-    expression += currentInput + ` ${op} `;
-    currentInput = '';
-  } else if (expression !== '' && ['+', '-', '*', '/'].includes(expression.slice(-2, -1))) {
-    expression = expression.slice(0, -3) + ` ${op} `;
+  if (resultDisplayed) {
+    expression = '';  // Reset expression if a new calculation starts after result is displayed
+    resultDisplayed = false;
   }
+  expression += ` ${op} `;
   updateDisplay(expression);
 }
 
 function appendNumber(num) {
-  if (num === '.' && currentInput.includes('.')) return; // Prevent multiple decimals in one number
-  currentInput += num;
-  updateDisplay(expression + formatNumber(currentInput));
+  if (resultDisplayed) {
+    expression = '';  // Reset expression if a new calculation starts after result is displayed
+    resultDisplayed = false;
+  }
+  if (num === '.' && expression.slice(-1) === '.') return;  // Prevent multiple decimals in a row
+  expression += num;
+  updateDisplay(formatExpression(expression));
 }
 
-function formatNumber(num) {
-  if (num.includes('.')) {
-    let [integer, decimal] = num.split('.');
-    integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return integer + '.' + decimal;
-  } else {
-    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+function appendParenthesis() {
+  if (resultDisplayed) {
+    expression = '';  // Reset expression if a new calculation starts after result is displayed
+    resultDisplayed = false;
   }
+  expression += isOpenParenthesisNext ? '(' : ')';
+  isOpenParenthesisNext = !isOpenParenthesisNext;
+  updateDisplay(expression);
+}
+
+function formatExpression(exp) {
+  return exp.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 function updateDisplay(value) {
