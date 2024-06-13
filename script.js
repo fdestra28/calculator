@@ -18,6 +18,8 @@ buttons.forEach(button => {
       appendParenthesis();
     } else if (value === '←') {
       deleteLastCharacter();
+    } else if (value === '±') {
+      toggleSign();
     } else {
       appendNumber(value);
     }
@@ -76,6 +78,20 @@ function appendParenthesis() {
 function deleteLastCharacter() {
   expression = expression.slice(0, -1);
   updateDisplay(expression);
+}
+
+function toggleSign() {
+  const parts = expression.split(' ');
+  const lastPart = parts.pop();
+  if (lastPart) {
+    if (lastPart.startsWith('-')) {
+      parts.push(lastPart.slice(1));
+    } else {
+      parts.push('-' + lastPart);
+    }
+    expression = parts.join(' ');
+    updateDisplay(expression);
+  }
 }
 
 function formatExpression(exp) {
