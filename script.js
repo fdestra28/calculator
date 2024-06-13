@@ -52,12 +52,19 @@ function appendOperator(op) {
 }
 
 function appendNumber(num) {
+  if (num === '.' && currentInput.includes('.')) return; // Prevent multiple decimals in one number
   currentInput += num;
   updateDisplay(expression + formatNumber(currentInput));
 }
 
 function formatNumber(num) {
-  return Number(num).toLocaleString();
+  if (num.includes('.')) {
+    let [integer, decimal] = num.split('.');
+    integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return integer + '.' + decimal;
+  } else {
+    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 }
 
 function updateDisplay(value) {
