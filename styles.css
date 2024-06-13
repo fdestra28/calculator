@@ -66,6 +66,7 @@ body.dark-mode h1 {
   width: 300px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 body.dark-mode .calculator {

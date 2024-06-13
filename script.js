@@ -57,6 +57,8 @@ darkModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
   // Change the icon based on the mode
   darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  // Adjust text color in typing animation based on dark mode
+  typingElement.style.color = document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#666';
 });
 
 // Function to clear the display
@@ -140,20 +142,43 @@ function formatExpression(exp) {
 
 // Function to update the display
 function updateDisplay(value) {
-  display.textContent = value;
+  // Split value into lines of at most 14 characters
+  const maxLength = 14;
+  const lines = [];
+  let line = '';
+
+  for (let i = 0; i < value.length; i++) {
+    if (line.length >= maxLength && value[i] !== ' ') {
+      lines.push(line.trim());
+      line = '';
+    }
+    line += value[i];
+  }
+
+  if (line.length > 0) {
+    lines.push(line.trim());
+  }
+
+  display.textContent = lines.join('\n');
 }
 
 // Typing animation for the "Made By Fajar Destrada" text
 function type() {
-  if (index < text.length) {
-    typingElement.textContent += text.charAt(index);
-    index++;
-    setTimeout(type, 100);
-  } else {
-    typingElement.textContent = text;
+  if (index >= text.length) {
+    index = 0; // Reset index to loop animation
   }
+  typingElement.textContent = text.substring(0, index + 1);
+  index++;
+  setTimeout(type, 200);
 }
 
-typingElement.textContent = '';
+// Start typing animation
 type();
 
+// Initialize dark mode based on user preference
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+if (prefersDarkScheme.matches) {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.textContent = '☀️';
+  typingElement.style.color = '#f0f0f0';
+}
