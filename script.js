@@ -29,7 +29,7 @@ function calculate() {
   if (expression !== '' && currentInput !== '') {
     expression += currentInput;
     try {
-      const result = eval(expression);
+      const result = eval(expression).toLocaleString();
       updateDisplay(`${expression} = ${result}`);
       currentInput = '';
       expression = '';
@@ -53,7 +53,11 @@ function appendOperator(op) {
 
 function appendNumber(num) {
   currentInput += num;
-  updateDisplay(expression + currentInput);
+  updateDisplay(expression + formatNumber(currentInput));
+}
+
+function formatNumber(num) {
+  return Number(num).toLocaleString();
 }
 
 function updateDisplay(value) {
