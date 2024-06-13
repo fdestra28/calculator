@@ -1,9 +1,12 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.btn');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
+const typingElement = document.querySelector('.typing');
+const text = typingElement.textContent;
 let expression = '';
 let isOpenParenthesisNext = true;  // Track if the next parenthesis should be open
 let resultDisplayed = false;
+let index = 0;
 
 // Add event listeners to buttons
 buttons.forEach(button => {
@@ -46,9 +49,14 @@ document.addEventListener('keydown', (event) => {
     appendParenthesis('(');
   } else if (key === ')') {
     appendParenthesis(')');
-} else if (key === ')') {
-    appendParenthesis(')');
   }
+});
+
+// Add event listener for dark mode toggle
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  // Change the icon based on the mode
+  darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 });
 
 // Function to clear the display
@@ -135,7 +143,17 @@ function updateDisplay(value) {
   display.textContent = value;
 }
 
-// Event listener for dark mode toggle
-darkModeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-});
+// Typing animation for the "Made By Fajar Destrada" text
+function type() {
+  if (index < text.length) {
+    typingElement.textContent += text.charAt(index);
+    index++;
+    setTimeout(type, 100);
+  } else {
+    typingElement.textContent = text;
+  }
+}
+
+typingElement.textContent = '';
+type();
+
